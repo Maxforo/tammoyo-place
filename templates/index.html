@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tammoyo Place | Борнео</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: #0d110e; color: #e3e8e4; scroll-behavior: smooth; }
+        
+        /* Главный экран */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(13, 17, 14, 0.2), rgba(13, 17, 14, 0.9)), url('/static/tammoyo.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .main-title { font-size: 3.5rem; letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 4px 15px rgba(0,0,0,0.7); margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.7); margin-bottom: 40px; }
+        .cta-btn { background-color: #5c4033; color: white; padding: 15px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; border-radius: 4px; transition: 0.3s; }
+        .cta-btn:hover { background-color: #4a3329; transform: translateY(-2px); }
+
+        /* Общий контейнер для блоков */
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        
+        /* Форма бронирования */
+        .booking-form { background-color: #141a16; padding: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; }
+        .form-title { text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #a3c6a8; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; background-color: #0d110e; border: 1px solid #5c4033; border-radius: 4px; color: white; font-size: 1rem; }
+        .submit-btn { width: 100%; background-color: #2e7d32; border: none; color: white; padding: 15px; font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .submit-btn:hover { background-color: #388e3c; }
+
+        /* Стили для галереи в линию */
+        .gallery-block { background-color: #141a16; padding: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; }
+        .gallery-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; justify-content: center; }
+        .gallery-item { flex: 1 1 calc(33.333% - 15px); min-width: 220px; max-width: 100%; background-color: #0d110e; border-radius: 6px; overflow: hidden; border: 1px solid #5c4033; text-align: center; padding-bottom: 10px; }
+        .gallery-item img { width: 100%; height: 180px; object-fit: cover; transition: 0.3s; }
+        .gallery-item img:hover { transform: scale(1.05); }
+        .gallery-desc { font-size: 0.9rem; color: #a3c6a8; margin-top: 10px; padding: 0 5px; font-weight: 500; }
+
+        /* Блок отзывов Google */
+        .reviews-block { background-color: #141a16; padding: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; }
+
+        /* Блок с картой */
+        .location-block { background-color: #141a16; padding: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+        .map-wrapper { position: relative; width: 100%; height: 400px; border-radius: 6px; overflow: hidden; border: 1px solid #5c4033; margin-top: 20px; }
+        .map-wrapper iframe { width: 100%; height: 100%; border: none; }
+        .location-info { margin-top: 20px; color: #e3e8e4; }
+        .location-info h3 { color: #a3c6a8; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase;}
+        .location-info p { font-size: 0.95rem; margin-bottom: 8px; color: #b0b5b1; }
+    </style>
+</head>
+<body>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <h1 class="main-title">Tammoyo Place</h1>
+        <p class="subtitle">Ваш уединенный уголок живой природы на Борнео</p>
+        <a href="#reserve" class="cta-btn">Забронировать домик</a>
+    </section>
+
+    <div class="container" id="reserve">
+        
+        <!-- Блок формы заявки -->
+        <div class="booking-form">
+            <h2 class="form-title">Оставить заявку</h2>
+            <form action="/book" method="POST">
+                <div class="form-group">
+                    <label>Ваше имя</label>
+                    <input type="text" name="username" placeholder="Максим" required>
+                </div>
+                <div class="form-group">
+                    <label>Телефон / Telegram для связи</label>
+                    <input type="text" name="contact" placeholder="+7 (999) 123-45-67" required>
+                </div>
+                <div class="form-group">
+                    <label>Какое бунгало хотите арендовать?</label>
+                    <select name="bungalow">
+                        <option value="Standard Eco-Lodge">Standard Eco-Lodge (£15/ночь)</option>
+                        <option value="Premium Family Villa">Premium Family Villa (£30/ночь)</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Отправить в обработку</button>
+            </form>
+        </div>
+
+        <!-- Блок: Галерея с твоими домиками -->
+        <div class="gallery-block">
+            <h2 class="form-title">Наш кемпинг</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/static/hotel1.jpg" alt="Бунгало">
+                    <div class="gallery-desc">Бунгало на берегу моря</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/hotel2.jpg" alt="Домик">
+                    <div class="gallery-desc">Маленькие крытые домики</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/hotel3.jpg" alt="Вид">
+                    <div class="gallery-desc">Уединенный пляж острова Бангги</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Блок: Живые отзывы из Google Maps -->
+        <div class="reviews-block">
+            <h2 class="form-title">Отзывы в Google Maps</h2>
+            
+            <!-- Интеграция виджета Elfsight -->
+            <div class="elfsight-app-2b320fe0-f99f-4270-ab37-4d904565cc90" data-elfsight-app-lazy></div>
+        </div>
+
+        <!-- Блок «Как нас найти» -->
+        <div class="location-block">
+            <h2 class="form-title">Как нас найти</h2>
+            
+            <div class="location-info">
+                <h3>📍 Наш адрес:</h3>
+                <p>Tammoyo Place, Pulau Banggi, Kudat, Sabah, Malaysia.</p>
+                
+                <h3>🚢 Как добраться:</h3>
+                <p>Добираемся на пароме или лодке из города <strong>Кудат (Kudat)</strong> прямиком до острова Бангги. Время в пути на пароме составляет около 1-1.5 часов.</p>
+            </div>
+
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://maps.google.com/maps?q=Tammoyo%20Place%20Pulau%20Banggi&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Подключение скрипта платформы Elfsight для работы виджета -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+
+</body>
+</html>
