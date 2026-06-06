@@ -8,7 +8,7 @@ app = Flask(__name__)
 URL = "https://api.callmebot.com/text.php?user=@maksforo&text=TEXT&apikey=8872428"
 
 # Маршрут для подтверждения прав в Яндекс Вебмастере
-@app.route('/yandex_d475dbce1f0f102c.html')
+@app.route('/yandex_d475dbee1f0f102c.html')
 def yandex_verification():
     return send_from_directory('static', 'yandex_d475dbee1f0f102c.html')
 
