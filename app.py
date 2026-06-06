@@ -10,7 +10,7 @@ URL = "https://api.callmebot.com/text.php?user=@maksforo&text=TEXT&apikey=887242
 # Маршрут для подтверждения прав в Яндекс Вебмастере
 @app.route('/yandex_d475dbce1f0f102c.html')
 def yandex_verification():
-    return send_from_directory('static', 'yandex_d475dbce1f0f102c.html')
+    return send_from_directory('static', 'yandex_d475dbee1f0f102c.html')
 
 @app.route("/")
 def home():
