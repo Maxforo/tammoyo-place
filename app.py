@@ -1,9 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for
-import datetime, requests
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+import datetime
+import requests
 
 app = Flask(__name__)
+
 # Твоя рабочая ссылка CallMeBot
 URL = "https://api.callmebot.com/text.php?user=@maksforo&text=TEXT&apikey=8872428"
+
+# Маршрут для подтверждения прав в Яндекс Вебмастере
+@app.route('/yandex_d475dbce1f0f102c.html')
+def yandex_verification():
+    return send_from_directory('static', 'yandex_d475dbce1f0f102c.html')
 
 @app.route("/")
 def home():
@@ -13,7 +20,7 @@ def home():
 def book():
     name = request.form.get("username")
     contact = request.form.get("contact")
-    bungalow = request.form.get("bungalow") # Принимаем выбранное бунгало
+    bungalow = request.form.get("bungalow") 
     
     # Сохраняем в bookings.txt
     data = f"{datetime.datetime.now()} | {name} | {contact} | {bungalow}\n"
@@ -34,4 +41,4 @@ def success():
     return render_template("success.html")
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
